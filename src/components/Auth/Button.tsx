@@ -4,12 +4,17 @@ import styles from './Button.module.css';
 interface ButtonProps {
   name: string;
   onButtonClick: MouseEventHandler<HTMLButtonElement>;
+  disabled: boolean;
 }
 
-const Button = ({ name, onButtonClick }: ButtonProps) => {
+const Button = ({ name, onButtonClick, disabled }: ButtonProps) => {
   return (
     <div>
-      <button className={styles.button} onClick={onButtonClick}>
+      <button
+        className={styles.button}
+        onClick={onButtonClick}
+        disabled={disabled}
+      >
         {name}
       </button>
     </div>

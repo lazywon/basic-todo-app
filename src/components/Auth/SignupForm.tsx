@@ -1,16 +1,27 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styles from './LoginForm.module.css';
 import Button from './Button';
 import { useRouter } from '../../hooks/useRouter';
+import { emailValidator, passwordValidator } from '../../utils/validator';
 
 const SignupForm = () => {
+  const { routeTo } = useRouter();
   const [userid, setUserid] = useState('');
   const [password, setPassword] = useState('');
+  const [validData, setValidData] = useState({
+    isUseridValid: false,
+    isPasswordValid: false,
+  });
+  const [warning, setWarning] = useState('');
 
   const onUseridChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      const inputEmail = e.target.value;
-      setUserid(inputEmail);
+      const inputUserid = e.target.value;
+      setUserid(inputUserid);
+      setValidData((prevValidData) => ({
+        ...prevValidData,
+        isUseridValid: emailValidator(inputUserid),
+      }));
     },
     [],
   );
@@ -19,6 +30,10 @@ const SignupForm = () => {
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const inputPassword = e.target.value;
       setPassword(inputPassword);
+      setValidData((prevValidData) => ({
+        ...prevValidData,
+        isPasswordValid: passwordValidator(inputPassword),
+      }));
     },
     [],
   );
@@ -27,6 +42,18 @@ const SignupForm = () => {
     event.preventDefault();
     console.log('signupClick');
   };
+
+  useEffect(() => {
+    let msg = '';
+    if (userid.length === 0 || password.length === 0) {
+      msg = 'Please enter your ID or Password.';
+    } else if (!validData.isUseridValid) {
+      msg = 'Invalid Email Address.';
+    } else if (!validData.isPasswordValid) {
+      msg = 'Invalid Password';
+    }
+    setWarning(msg);
+  }, [userid.length, password.length, setWarning, validData]);
 
   return (
     <form className={styles.form} method="POST">
@@ -50,10 +77,17 @@ const SignupForm = () => {
           placeholder="Password"
         />
       </div>
-      {/* <div className={styles.info}>
-    <span className={styles.info_text}>{warning}</span>
-  </div> */}
-      <Button name="Signup" onButtonClick={handleSignupClick}></Button>
+      <div className={styles.info}>
+        <span className={styles.info_text}>{warning}</span>
+      </div>
+      <Button
+        name="Signup"
+        onButtonClick={handleSignupClick}
+        disabled={
+          warning?.length > 0 ||
+          !(validData.isUseridValid && validData.isPasswordValid)
+        }
+      ></Button>
     </form>
   );
 };

@@ -1,10 +1,12 @@
 import React, { useCallback, useState } from 'react';
 import styles from './LoginForm.module.css';
 import Button from './Button';
+import { useRouter } from '../../hooks/useRouter';
 
 const LoginForm = () => {
   const [userid, setUserid] = useState('');
   const [password, setPassword] = useState('');
+  const { routeTo } = useRouter();
 
   const onUseridChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,6 +27,11 @@ const LoginForm = () => {
   const handleLoginClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     console.log('loginClick');
+  };
+
+  const onMovetoSignup = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    routeTo('/signup');
   };
 
   return (
@@ -53,6 +60,10 @@ const LoginForm = () => {
         <span className={styles.info_text}>{warning}</span>
       </div> */}
       <Button name="Login" onButtonClick={handleLoginClick}></Button>
+      <div>
+        <span>Don't have an account yet?</span>
+        <button onClick={onMovetoSignup}>Sign Up</button>
+      </div>
     </form>
   );
 };

@@ -1,46 +1,39 @@
-# Getting Started with Create React App
+# Basic Todo App with React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 📝 프로젝트 실행 방법
 
-## Available Scripts
+```bash
+  # 패키지매니저를 변경하려면 yarn.lock을 삭제 후 npm install & npm start 등을 실행한다.
+  $ yarn && yarn dev
+```
 
-In the project directory, you can run:
+## 배포 링크
 
-### `npm start`
+## 🚀 학습 목표
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+> 다수의 컴포넌트를 페이지로 구성하고 복잡해진 상태를 관리하기
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- ✔️ `데스크탑 타겟`의 웹 앱을 구현
+- ✔️ 상태 관리를 위해 `Recoil` 활용
+- ✔️ `Router`를 활용한 여러 페이지 전환
+- ✔️ `React-query`를 활용한 서버와의 통신 구현
+- ✔️ `Jest` 이용한 테스트 코드 작성
 
-### `npm test`
+## ✅ 필수 구현 요구 사항
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Auth
 
-### `npm run build`
+- [ ] 회원가입과 로그인 페이지에 이메일과 비밀번호의 유효성 검사기능을 구현
+  - [ ] 이메일 조건: @ 포함
+  - [ ] 비밀번호 조건: 8자 이상
+- [ ] 회원가입 페이지에서 버튼을 클릭 시 회원가입을 진행하고 회원가입이 정상적으로 완료되었을 시 `/signin` 경로로 이동
+- [ ] 로그인 페이지에서 버튼을 클릭 시, 로그인을 진행하고 로그인이 정상적으로 완료되었을 시 `/todo` 경로로 이동
+  - [ ] 로그인 API는 로그인이 성공했을 시 Response Body에 JWT를 포함해서 응답
+  - [ ] 응답받은 JWT는 로컬 스토리지에 저장
+- [ ] 로그인 여부에 따른 리다이렉트 처리를 구현
+  - [ ] 로컬 스토리지에 토큰이 있는 상태로 `/signin` 또는 `/signup` 페이지에 접속한다면 `/todo` 경로로 리다이렉트
+  - [ ] 로컬 스토리지에 토큰이 없는 상태로 `/todo` 페이지에 접속한다면 `/signin` 경로로 리다이렉트
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### TODO LIST
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [ ]

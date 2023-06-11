@@ -3,10 +3,9 @@ import styles from './LoginForm.module.css';
 import Button from './Button';
 import { useRouter } from '../../hooks/useRouter';
 
-const LoginForm = () => {
+const SignupForm = () => {
   const [userid, setUserid] = useState('');
   const [password, setPassword] = useState('');
-  const { routeTo } = useRouter();
 
   const onUseridChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,14 +23,9 @@ const LoginForm = () => {
     [],
   );
 
-  const handleLoginClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSignupClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    console.log('loginClick');
-  };
-
-  const onMovetoSignup = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    routeTo('/signup');
+    console.log('signupClick');
   };
 
   return (
@@ -57,15 +51,11 @@ const LoginForm = () => {
         />
       </div>
       {/* <div className={styles.info}>
-        <span className={styles.info_text}>{warning}</span>
-      </div> */}
-      <Button name="Login" onButtonClick={handleLoginClick}></Button>
-      <div>
-        <span>Don't have an account yet?</span>
-        <button onClick={onMovetoSignup}>Sign Up</button>
-      </div>
+    <span className={styles.info_text}>{warning}</span>
+  </div> */}
+      <Button name="Signup" onButtonClick={handleSignupClick}></Button>
     </form>
   );
 };
 
-export default LoginForm;
+export default SignupForm;

@@ -1,11 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import styles from './LoginForm.module.css';
 import Button from './Button';
-import { useRouter } from '../../hooks/useRouter';
 import { emailValidator, passwordValidator } from '../../utils/validator';
+import useSignup from '../../hooks/mutation/auth/useSignup';
 
 const SignupForm = () => {
-  const { routeTo } = useRouter();
   const [userid, setUserid] = useState('');
   const [password, setPassword] = useState('');
   const [validData, setValidData] = useState({
@@ -13,10 +12,12 @@ const SignupForm = () => {
     isPasswordValid: false,
   });
   const [warning, setWarning] = useState('');
+  const { mutate: signupMutate } = useSignup();
 
   const onUseridChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const inputUserid = e.target.value;
+
       setUserid(inputUserid);
       setValidData((prevValidData) => ({
         ...prevValidData,
@@ -29,6 +30,7 @@ const SignupForm = () => {
   const onPasswordChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const inputPassword = e.target.value;
+
       setPassword(inputPassword);
       setValidData((prevValidData) => ({
         ...prevValidData,
@@ -41,6 +43,8 @@ const SignupForm = () => {
   const handleSignupClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     console.log('signupClick');
+
+    signupMutate({ userid, password });
   };
 
   useEffect(() => {

@@ -36,10 +36,10 @@
 
 ### TODO LIST
 
-- [ ] `/todo `경로에 접속하면 투두 리스트의 목록을 볼 수 있도록 하기
-  - [ ] 목록에서는 TODO의 내용과 완료 여부 표시
-  - [ ] TODO의 완료 여부는 `<input type="checkbox" />`를 통해 표현
-  - [ ] TODO는 `<li>` tag를 이용해 감싸주기
+- [x] `/todo `경로에 접속하면 투두 리스트의 목록을 볼 수 있도록 하기
+  - [x] 목록에서는 TODO의 내용과 완료 여부 표시
+  - [x] TODO의 완료 여부는 `<input type="checkbox" />`를 통해 표현
+  - [x] TODO는 `<li>` tag를 이용해 감싸주기
 - [ ] 리스트 페이지에 새로운 TODO를 입력할 수 있는 input과 추가 button 생성
   - [ ] TODO 입력 input에는 `data-testid="new-todo-input"` 속성을 부여
   - [ ] TODO 추가 button에는 `data-testid="new-todo-add-button"` 속성을 부여

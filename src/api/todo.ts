@@ -8,8 +8,8 @@ const todoApi = {
   getTodos: () => {
     return client.get('/todos');
   },
-  updateTodo: ({ id, todo }: TodoUpdateForm) => {
-    return client.put(`/todos/${id}`, todo);
+  updateTodo: ({ id, todo, isCompleted }: TodoUpdateForm) => {
+    return client.put(`/todos/${id}`, { todo, isCompleted });
   },
   deleteTodo: (id: number | undefined) => {
     return client.delete(`/todos/${id}`);

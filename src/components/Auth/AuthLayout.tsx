@@ -1,5 +1,7 @@
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, useEffect } from 'react';
 import styles from './AuthLayout.module.css';
+import { useRouter } from '../../hooks/common/useRouter';
+import { getAuthFromLocalStorage } from '../../utils/tokenHandler';
 
 interface AuthLayoutProps {
   title: string;
@@ -11,6 +13,17 @@ const AuthLayout = ({
   subtitle,
   children,
 }: PropsWithChildren<AuthLayoutProps>) => {
+  const { routeTo } = useRouter();
+
+  useEffect(() => {
+    const authData = getAuthFromLocalStorage();
+
+    if (authData && authData.token) {
+      routeTo('/todo');
+      return;
+    }
+  }, [routeTo]);
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.outer}>

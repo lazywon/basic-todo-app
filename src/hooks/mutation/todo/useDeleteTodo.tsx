@@ -1,15 +1,14 @@
 import { useMutation, useQueryClient } from 'react-query';
 import todoApi from '../../../api/todo';
-import { TodoUpdateForm } from '../../../types/todo';
 
-const usePutTodo = () => {
+const useDeleteTodo = () => {
   const queryClient = useQueryClient();
 
-  return useMutation((data: TodoUpdateForm) => todoApi.updateTodo(data), {
+  return useMutation((id: number | undefined) => todoApi.deleteTodo(id), {
     onSuccess: () => {
       queryClient.invalidateQueries(['getToDos']);
     },
   });
 };
 
-export default usePutTodo;
+export default useDeleteTodo;

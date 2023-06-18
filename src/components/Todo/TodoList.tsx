@@ -10,6 +10,8 @@ interface TodoListProps {
   isLoading: boolean;
   onUpdateTodo: (id: number, isCompleted: boolean, todo: string) => void;
   onDeleteTodo: (id: number) => void;
+  editMode: boolean;
+  onChangeEditMode: () => void;
 }
 
 const TodoList = ({
@@ -19,8 +21,10 @@ const TodoList = ({
   isLoading,
   onUpdateTodo,
   onDeleteTodo,
+  editMode,
+  onChangeEditMode,
 }: TodoListProps) => {
-  const [editMode, setEditMode] = useState(false);
+  // const [editMode, setEditMode] = useState(false);
 
   if (isLoading) return <LoadingBar isLoading={isLoading} />;
 
@@ -57,7 +61,7 @@ const TodoList = ({
             </label>
             <button
               onClick={() =>
-                editMode ? setEditMode((prev) => !prev) : onDeleteTodo(todo?.id)
+                editMode ? onChangeEditMode() : onDeleteTodo(todo?.id)
               }
             >
               {editMode ? '취소' : '삭제'}
@@ -66,7 +70,7 @@ const TodoList = ({
               onClick={() =>
                 editMode
                   ? onUpdateTodo(todo.id, todo.isCompleted, todo.todo)
-                  : setEditMode((prev) => !prev)
+                  : onChangeEditMode()
               }
             >
               {editMode ? '완료' : '수정'}

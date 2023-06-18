@@ -5,10 +5,12 @@ import { useEffect, useState } from 'react';
 import { TodoData } from '../../types/todo';
 import useDeleteTodo from '../../hooks/mutation/todo/useDeleteTodo';
 import usePostTodo from '../../hooks/mutation/todo/usePostTodo';
+import { useRouter } from '../../hooks/common/useRouter';
 
 const TodoPage = () => {
   const [todoList, setTodoList] = useState<TodoData[]>([]);
   const [todoText, setTodoText] = useState('');
+  const [editMode, setEditMode] = useState(false);
   const { data: todos, isLoading } = useGetTodos();
   const { mutate: putTodoMutate } = usePutTodo();
   const { mutate: deleteTodoMutate } = useDeleteTodo();
@@ -28,6 +30,7 @@ const TodoPage = () => {
 
   const handleUpdateTodo = (id: number, isCompleted: boolean, todo: string) => {
     putTodoMutate({ id, isCompleted, todo });
+    setEditMode((prev) => !prev);
   };
 
   const handleDeleteTodo = (id: number) => {
@@ -36,6 +39,11 @@ const TodoPage = () => {
 
   const handleCreateTodo = (todo: string) => {
     createTodoMutate({ todo });
+    setTodoText('');
+  };
+
+  const handleEditMode = () => {
+    setEditMode((prev) => !prev);
   };
 
   useEffect(() => {
@@ -65,6 +73,8 @@ const TodoPage = () => {
         isLoading={isLoading}
         onUpdateTodo={handleUpdateTodo}
         onDeleteTodo={handleDeleteTodo}
+        editMode={editMode}
+        onChangeEditMode={handleEditMode}
       />
     </div>
   );

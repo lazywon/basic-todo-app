@@ -6,7 +6,7 @@ const useDeleteTodo = () => {
 
   return useMutation((id: number | undefined) => todoApi.deleteTodo(id), {
     onSuccess: () => {
-      queryClient.invalidateQueries(['getToDos']);
+      queryClient.invalidateQueries(['getTodos']);
     },
   });
 };

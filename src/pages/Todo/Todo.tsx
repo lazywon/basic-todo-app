@@ -4,12 +4,15 @@ import usePutTodo from '../../hooks/mutation/todo/usePutTodo';
 import { useEffect, useState } from 'react';
 import { TodoData } from '../../types/todo';
 import useDeleteTodo from '../../hooks/mutation/todo/useDeleteTodo';
+import usePostTodo from '../../hooks/mutation/todo/usePostTodo';
 
 const TodoPage = () => {
   const [todoList, setTodoList] = useState<TodoData[]>([]);
+  const [todoText, setTodoText] = useState('');
   const { data: todos, isLoading } = useGetTodos();
   const { mutate: putTodoMutate } = usePutTodo();
   const { mutate: deleteTodoMutate } = useDeleteTodo();
+  const { mutate: createTodoMutate } = usePostTodo();
 
   const handleCheckTodo = (id: number, isCompleted: boolean) => {
     setTodoList((prev) =>
@@ -31,6 +34,10 @@ const TodoPage = () => {
     deleteTodoMutate(id);
   };
 
+  const handleCreateTodo = (todo: string) => {
+    createTodoMutate({ todo });
+  };
+
   useEffect(() => {
     if (todos) {
       setTodoList(todos);
@@ -39,8 +46,18 @@ const TodoPage = () => {
 
   return (
     <div>
-      <input type="text" data-testid="new-todo-input" />
-      <button data-testid="new-todo-add-button">+ Add New Task</button>
+      <input
+        type="text"
+        value={todoText}
+        data-testid="new-todo-input"
+        onChange={(e) => setTodoText(e.target.value)}
+      />
+      <button
+        data-testid="new-todo-add-button"
+        onClick={(e) => handleCreateTodo(todoText)}
+      >
+        + Add New Task
+      </button>
       <TodoList
         todoList={todoList}
         onCheckTodo={handleCheckTodo}

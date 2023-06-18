@@ -7,23 +7,23 @@ import useSignin from '../../hooks/mutation/auth/useSignin';
 
 const LoginForm = () => {
   const { routeTo } = useRouter();
-  const [userid, setUserid] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [validData, setValidData] = useState({
-    isUseridValid: false,
+    isEmailValid: false,
     isPasswordValid: false,
   });
   const [warning, setWarning] = useState('');
   const { mutate: signinMutate } = useSignin();
 
-  const onUseridChange = useCallback(
+  const onEmailChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      const inputUserid = e.target.value;
+      const inputEmail = e.target.value;
 
-      setUserid(inputUserid);
+      setEmail(inputEmail);
       setValidData((prevValidData) => ({
         ...prevValidData,
-        isUseridValid: emailValidator(inputUserid),
+        isEmailValid: emailValidator(inputEmail),
       }));
     },
     [],
@@ -46,7 +46,7 @@ const LoginForm = () => {
     event.preventDefault();
     console.log('loginClick');
 
-    signinMutate({ userid, password });
+    signinMutate({ email, password });
   };
 
   const onMovetoSignup = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -56,15 +56,15 @@ const LoginForm = () => {
 
   useEffect(() => {
     let msg = '';
-    if (userid.length === 0 || password.length === 0) {
+    if (email.length === 0 || password.length === 0) {
       msg = 'Please enter your ID or Password.';
-    } else if (!validData.isUseridValid) {
+    } else if (!validData.isEmailValid) {
       msg = 'Invalid Email Address.';
     } else if (!validData.isPasswordValid) {
       msg = 'Invalid Password';
     }
     setWarning(msg);
-  }, [userid.length, password.length, setWarning, validData]);
+  }, [email.length, password.length, setWarning, validData]);
 
   return (
     <form className={styles.form} method="POST">
@@ -72,9 +72,9 @@ const LoginForm = () => {
         <label>ID</label>
         <input
           type="email"
-          name="userid"
-          value={userid}
-          onChange={onUseridChange}
+          name="email"
+          value={email}
+          onChange={onEmailChange}
           placeholder="Email"
         />
       </div>
@@ -96,7 +96,7 @@ const LoginForm = () => {
         onButtonClick={handleLoginClick}
         disabled={
           warning?.length > 0 ||
-          !(validData.isUseridValid && validData.isPasswordValid)
+          !(validData.isEmailValid && validData.isPasswordValid)
         }
       ></Button>
       <div>

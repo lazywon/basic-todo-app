@@ -1,14 +1,13 @@
 export interface UserInfo {
-  userid: string;
+  email: string;
   password: string;
 }
 
 export interface AuthInfo {
-  userid: string;
+  email: string;
   token: string;
 }
 
 export interface AuthResponse {
-  msg: string;
-  token?: string;
+  access_token?: string;
 }

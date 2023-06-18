@@ -9,12 +9,10 @@ const useSignin = () => {
   const { routeTo } = useRouter();
   return useMutation((userInfo: UserInfo) => authApi.login(userInfo), {
     onSuccess: (data: AxiosResponse<AuthResponse>, userInfo: UserInfo) => {
-      const { userid } = userInfo;
-      const token = data.data.token as string;
+      const { email } = userInfo;
+      const token = data.data.access_token as string;
 
-      console.log(data.data.msg);
-
-      setAuthFromLocalStorage({ userid, token });
+      setAuthFromLocalStorage({ email, token });
       routeTo('/todo');
     },
   });

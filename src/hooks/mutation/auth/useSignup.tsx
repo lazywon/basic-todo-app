@@ -9,7 +9,6 @@ const useSignup = () => {
 
   return useMutation((userInfo: UserInfo) => authApi.signup(userInfo), {
     onSuccess: (data: AxiosResponse<AuthResponse>) => {
-      console.log(data.data.msg);
       routeTo('/signin');
     },
   });

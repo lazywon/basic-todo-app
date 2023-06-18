@@ -8,7 +8,7 @@ import { useRouter } from '../hooks/common/useRouter';
 const BACKEND_URL = process.env.REACT_APP_SERVER_URL;
 
 const clearAuthToken = () => {
-  setAuthFromLocalStorage({ userid: '', token: '' });
+  setAuthFromLocalStorage({ email: '', token: '' });
 };
 
 const client = axios.create({

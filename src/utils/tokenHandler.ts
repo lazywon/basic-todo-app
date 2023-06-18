@@ -3,7 +3,7 @@ import { AuthInfo } from '../types/auth';
 export const getAuthFromLocalStorage = (): AuthInfo => {
   return localStorage.getItem('auth')
     ? JSON.parse(localStorage.getItem('auth') || '{}')
-    : { userid: '', token: '' };
+    : { email: '', token: '' };
 };
 
 export const setAuthFromLocalStorage = (auth: AuthInfo) => {
